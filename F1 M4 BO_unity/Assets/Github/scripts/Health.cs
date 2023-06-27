@@ -98,6 +98,11 @@ using UnityEngine.Timeline;
     }
     void OnTriggerEnter2D(Collider2D other)
     {
+       if (other.gameObject.CompareTag("Healflower"))
+        {
+            health += 6;
+            Debug.Log("Health reduced! Current health: " + health);
+        }
         if (other.gameObject.CompareTag("Spikes"))
         {
             health -= 1;

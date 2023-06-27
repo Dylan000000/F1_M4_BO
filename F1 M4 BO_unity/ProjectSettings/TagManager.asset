@@ -7,6 +7,8 @@ TagManager:
   - spike
   - Spike
   - Spikes
+  - enemy
+  - Healflower
   layers:
   - Default
   - TransparentFX
