@@ -16,7 +16,6 @@ using UnityEngine.Timeline;
     public Sprite emptyHeart;
     public UnityEngine.Vector3 spawnpoint;
     public DeathscreenUI gameManager;
-    private bool isdead;
     void Update()
     {
         if (health > numOfHearts)
@@ -57,9 +56,9 @@ using UnityEngine.Timeline;
                 Debug.Log("Collision occurred!");
                 if (health <= 0)
                 {
-                    if (health <= 0 && !isdead)
+                    if (health <= 0)
                     {
-                        isdead = true;
+                
                         gameManager.gameoverscreen();
                         Debug.Log("ded");
                         Time.timeScale = 0f;
@@ -78,9 +77,9 @@ using UnityEngine.Timeline;
                 health -= 2;
                 if (health <= 0)
                 {
-                    if (health <= 0 && !isdead)
+                    if (health <= 0)
                     {
-                        isdead = true;
+
                         gameManager.gameoverscreen();
                         Debug.Log("ded");
                         Time.timeScale = 0f;
@@ -103,9 +102,8 @@ using UnityEngine.Timeline;
         {
             health -= 1;
             Debug.Log("Health reduced! Current health: " + health);
-            if (health <= 0 && !isdead)
+            if (health <= 0)
             {
-                isdead = true;
                 gameManager.gameoverscreen();
                 Debug.Log("ded");
                 Time.timeScale = 0f;

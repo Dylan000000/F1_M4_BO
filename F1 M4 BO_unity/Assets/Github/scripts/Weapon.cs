@@ -12,6 +12,7 @@ public class Weapon : MonoBehaviour
     private float shootDelay = 1.5f;
     public float time = 0f;
     public bool haveweapon;
+    public GameObject laser;
 
     // Reference to the child object with the Arm_01 sprite renderer
     public GameObject arm01Object;
@@ -25,7 +26,7 @@ public class Weapon : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && time >= shootDelay && haveweapon)
         {
             Shoot();
-            time = 0f;
+            time = 0.2f;
             Debug.Log("test");
         }
 
@@ -39,10 +40,16 @@ public class Weapon : MonoBehaviour
         }
     }
 
+    IEnumerator ActivateAndDeactivateLaser(float duration)
+    {
+        laser.SetActive(true);
+        yield return new WaitForSeconds(duration);
+        laser.SetActive(false);
+    }
+
     void Shoot()
     {
-        // Create a new bullet instance
-        GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
         lasereffect.Play();
+        StartCoroutine(ActivateAndDeactivateLaser(0.5f));
     }
 }
