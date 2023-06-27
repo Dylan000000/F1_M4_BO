@@ -9,6 +9,10 @@ TagManager:
   - Spikes
   - enemy
   - Healflower
+  - Enemy
+  - weapon
+  - Coin
+  - space_part
   layers:
   - Default
   - TransparentFX
