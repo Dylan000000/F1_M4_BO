@@ -25,6 +25,7 @@ public class Weapon : MonoBehaviour
         {
             haveweapon = true;
             Destroy(other.gameObject);
+
         }
     }
 

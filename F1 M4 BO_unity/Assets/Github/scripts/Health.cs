@@ -1,27 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.SocialPlatforms;
 using UnityEngine.UI;
-using static UnityEngine.RuleTile.TilingRuleOutput;
-using UnityEngine.Timeline;
 
- public class Health : MonoBehaviour
+public class Health : MonoBehaviour
 {
     public float health;
     public int numOfHearts;
     public Image[] heartImages;
     public Sprite fullHeart;
     public Sprite emptyHeart;
-    public UnityEngine.Vector3 spawnpoint;
+    public Vector3 spawnpoint;
     public DeathscreenUI gameManager;
+    public GameObject hurtcanvas;
+
+    private bool isHurt;
+
     void Update()
     {
         if (health > numOfHearts)
         {
             health = numOfHearts;
         }
+
         for (int i = 0; i < heartImages.Length; i++)
         {
             if (i < health)
@@ -32,6 +33,7 @@ using UnityEngine.Timeline;
             {
                 heartImages[i].sprite = emptyHeart;
             }
+
             if (i < numOfHearts)
             {
                 heartImages[i].enabled = true;
@@ -45,24 +47,21 @@ using UnityEngine.Timeline;
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("touched somethingaaaaa: " + collision.gameObject.tag.ToLower());
+        string tag = collision.gameObject.tag.ToLower().Trim();
 
-        switch(collision.gameObject.tag.ToLower().Trim())
+        switch (tag)
         {
-            case "Spikes":
+            case "spikes":
             case "enemy":
                 health -= 1;
                 Debug.Log("Health reduced! Current health: " + health);
                 Debug.Log("Collision occurred!");
+                ActivateHurtCanvas();
                 if (health <= 0)
                 {
-                    if (health <= 0)
-                    {
-                
-                        gameManager.gameoverscreen();
-                        Debug.Log("ded");
-                        Time.timeScale = 0f;
-                    }
+                    gameManager.gameoverscreen();
+                    Debug.Log("ded");
+                    Time.timeScale = 0f;
                 }
                 break;
             case "medkit":
@@ -71,19 +70,16 @@ using UnityEngine.Timeline;
                 {
                     health = 6;
                 }
-                    Debug.Log("health up");
+                Debug.Log("health up");
                 break;
             case "strong enemy":
                 health -= 2;
+                ActivateHurtCanvas();
                 if (health <= 0)
                 {
-                    if (health <= 0)
-                    {
-
-                        gameManager.gameoverscreen();
-                        Debug.Log("ded");
-                        Time.timeScale = 0f;
-                    }
+                    gameManager.gameoverscreen();
+                    Debug.Log("ded");
+                    Time.timeScale = 0f;
                 }
                 break;
             case "healflower":
@@ -93,20 +89,21 @@ using UnityEngine.Timeline;
                     health = 6;
                 }
                 break;
-
         }
     }
+
     void OnTriggerEnter2D(Collider2D other)
     {
-       if (other.gameObject.CompareTag("Healflower"))
+        if (other.gameObject.CompareTag("Healflower"))
         {
             health += 6;
-            Debug.Log("Health reduced! Current health: " + health);
+            Debug.Log("Health increased! Current health: " + health);
         }
         if (other.gameObject.CompareTag("Spikes"))
         {
             health -= 1;
             Debug.Log("Health reduced! Current health: " + health);
+            ActivateHurtCanvas();
             if (health <= 0)
             {
                 gameManager.gameoverscreen();
@@ -114,5 +111,22 @@ using UnityEngine.Timeline;
                 Time.timeScale = 0f;
             }
         }
+    }
+
+    void ActivateHurtCanvas()
+    {
+        if (!isHurt)
+        {
+            isHurt = true;
+            hurtcanvas.SetActive(true);
+            StartCoroutine(DeactivateHurtCanvas());
+        }
+    }
+
+    IEnumerator DeactivateHurtCanvas()
+    {
+        yield return new WaitForSeconds(0.2f);
+        hurtcanvas.SetActive(false);
+        isHurt = false;
     }
 }
