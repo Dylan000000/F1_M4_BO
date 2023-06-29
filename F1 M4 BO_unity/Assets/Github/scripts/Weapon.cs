@@ -24,6 +24,7 @@ public class Weapon : MonoBehaviour
         if (other.CompareTag("weapon"))
         {
             haveweapon = true;
+            Destroy(other.gameObject);
 
         }
     }

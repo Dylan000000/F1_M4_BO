@@ -13,6 +13,7 @@ TagManager:
   - weapon
   - Coin
   - space_part
+  - breakable
   layers:
   - Default
   - TransparentFX
