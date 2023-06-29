@@ -10,14 +10,22 @@ public class Weapon : MonoBehaviour
 
     private bool canShoot = true;
     private float shootDelay = 1.5f;
-    public float time = 0f;
-    public bool haveweapon;
+    private float time = 0f;
+    private bool haveweapon;
     public GameObject laser;
 
     // Reference to the child object with the Arm_01 sprite renderer
     public GameObject arm01Object;
     // Reference to the Arm&Gun_01 sprite
     public Sprite armGunSprite;
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("weapon"))
+        {
+            haveweapon = true;
+        }
+    }
 
     // Update is called once per frame
     void Update()
