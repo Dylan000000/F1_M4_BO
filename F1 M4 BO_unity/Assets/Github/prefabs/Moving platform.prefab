@@ -44,7 +44,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5535463369284479088}
   - component: {fileID: 5535463369284479091}
-  - component: {fileID: 5535463369284479090}
   - component: {fileID: 5535463369284479089}
   m_Layer: 0
   m_Name: moving platform
@@ -120,23 +119,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &5535463369284479090
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5535463369284479053}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b60ec5ad597f4249ae0ac6b97f8ee1b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 3
-  patrolPoints:
-  - {fileID: 5535463369440803195}
-  - {fileID: 5535463370039634629}
-  waitTime: 0
 --- !u!61 &5535463369284479089
 BoxCollider2D:
   m_ObjectHideFlags: 0
