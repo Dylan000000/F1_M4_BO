@@ -32,7 +32,7 @@ public class Weapon : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        haveweapon = true;
+        
         time += Time.deltaTime;
         if (Input.GetMouseButtonDown(0) && time >= shootDelay && haveweapon)
         {
